@@ -1,1 +1,1 @@
-# AdventOfCode2022
+My personal implementation of the assignments from https://adventofcode.com/2022
