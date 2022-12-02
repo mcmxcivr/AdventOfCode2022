@@ -33,5 +33,4 @@ public class CalorieCountingTest {
       9000
 
       10000""";
-
 }
