@@ -3,13 +3,13 @@ package nl.mcmxcivr.aoc2022.day2;
 class Application {
 
   public static void main(String[] args) {
-    RockPaperScissors rockPaperScissors = RockPaperScissors.fromString(INPUT_1);
+    RockPaperScissors rockPaperScissors = RockPaperScissors.fromString(INPUT);
 
     System.out.println("Answer 1: " + rockPaperScissors.getTotalScoreWithSimpleStrategyGuide());
     System.out.println("Answer 2: " + rockPaperScissors.getTotalScoreWithTopSecretStrategyGuide());
   }
 
-  private static final String INPUT_1 = """
+  private static final String INPUT = """
       B X
       B Z
       B Z

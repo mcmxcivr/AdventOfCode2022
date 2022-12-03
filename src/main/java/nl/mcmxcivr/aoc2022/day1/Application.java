@@ -3,13 +3,13 @@ package nl.mcmxcivr.aoc2022.day1;
 class Application {
 
   public static void main(String[] args) {
-    CalorieCounting calorieCounting = CalorieCounting.fromString(INPUT_1);
+    CalorieCounting calorieCounting = CalorieCounting.fromString(INPUT);
 
     System.out.println("Answer 1: " + calorieCounting.getMaxAmountOfCalories());
     System.out.println("Answer 2: " + calorieCounting.getTopThreeAmountOfCalories());
   }
 
-  private static final String INPUT_1 = """
+  private static final String INPUT = """
       3120
       4127
       1830
