@@ -16,14 +16,14 @@ public class RucksackReorganization {
   }
 
   public int sumItemTypePrioritiesForGroupsOfThree() {
-    Collection<List<String>> batches = IntStream.range(0, rucksacks.size()) //
+    Collection<List<String>> groups = IntStream.range(0, rucksacks.size()) //
         .boxed() //
         .collect(Collectors.groupingBy(partition -> (partition / 3), //
             Collectors.mapping(rucksacks::get, Collectors.toList()))) //
         .values();
 
-    return batches.stream() //
-        .map(this::findCommonItemType) //
+    return groups.stream() //
+        .map(this::findCommonItemTypeInGroup) //
         .map(this::calculatePriority) //
         .mapToInt(Integer::valueOf) //
         .sum();
@@ -31,23 +31,23 @@ public class RucksackReorganization {
 
   public int sumItemTypePriorities() {
     return rucksacks.stream() //
-        .map(r -> findCommon(toCharacterSet(r.substring(0, (r.length() / 2))), r.substring(r.length() / 2)).stream()
-            .findFirst() //
+        .map(r -> findCommonItemTypes(toCharacterSet(r.substring(0, (r.length() / 2))), r.substring(r.length() / 2))
+            .stream().findFirst() //
             .orElseThrow(() -> new IllegalStateException("Missing common type item"))) //
         .map(this::calculatePriority) //
         .mapToInt(Integer::intValue) //
         .sum();
   }
 
-  private char findCommonItemType(List<String> rucksacks) {
-    Set<Character> charactersLeft = findCommon(toCharacterSet(rucksacks.get(0)), rucksacks.get(1));
-    Set<Character> common = findCommon(charactersLeft, rucksacks.get(2));
+  private char findCommonItemTypeInGroup(List<String> group) {
+    Set<Character> charactersLeft = findCommonItemTypes(toCharacterSet(group.get(0)), group.get(1));
+    Set<Character> common = findCommonItemTypes(charactersLeft, group.get(2));
     return common.stream() //
         .findFirst() //
         .orElseThrow(() -> new IllegalStateException("Missing common type item"));
   }
 
-  private Set<Character> findCommon(Set<Character> left, String items) {
+  private Set<Character> findCommonItemTypes(Set<Character> left, String items) {
     return left.stream() //
         .filter(c -> items.contains(c + "")) //
         .collect(Collectors.toSet());
